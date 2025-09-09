@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Responsive Full-Page Table (CSS only)</title>
+  <style>
+    /* Make the page take full viewport */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Reset table look */
+    table {
+      border-collapse: collapse;
+      width: 100%;           /* always full width */
+      height: 100vh;         /* full viewport height */
+      table-layout: fixed;   /* evenly distribute columns, allow shrinking */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+      color: #f8fafc;
+    }
+
+    /* simple border and subtle shadow to cell content */
+    td {
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: clamp(8px, 1.6vw, 24px); /* fluid padding */
+      vertical-align: middle;
+      overflow: hidden;      /* prevents overflow when space is small */
+      position: relative;
+    }
+
+    /* make each cell a flex container so contents center nicely */
+    .cell-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 0.4em;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    /* Fluid/scaling typography:
+       - clamp(min, preferred, max) keeps type readable but allows shrinking
+       - vw ties scale to viewport width so content reduces on narrow screens
+    */
+    .title {
+      font-size: clamp(14px, 2.2vw, 36px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: clamp(11px, 1.4vw, 16px);
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    /* Optional tiny badge to show cell index */
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: clamp(10px, 1.4vw, 12px);
+      background: rgba(255,255,255,0.06);
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #fff;
+    }
+
+    /* Ensure long text wraps and doesn't break layout badly */
+    .wrap {
+      word-break: break-word;
+      max-width: 95%;
+    }
+
+    /* Mobile: stack rows vertically when viewport is narrow */
+    @media (max-width: 480px) {
+      table, tbody, tr {
+        display: block;           /* stack layout without JS */
+        width: 100%;
+        height: auto;
+      }
+      tr {
+        margin-bottom: 6px;
+      }
+      td {
+        display: block;
+        width: 100%;
+        height: calc((100vh - 30px) / 5); /* give each cell proportional height */
+      }
+    }
+
+    /* nice hover effect (pure CSS) */
+    td:hover .cell-inner { transform: translateY(-4px); transition: transform 220ms ease; }
+  </style>
+</head>
+<body>
+  <table role="table" aria-label="Responsive full page table">
+    <tr>
+      <td>
+        <div class="badge">1</div>
+        <div class="cell-inner">
+          <h1 class="title wrap">Cell 1 — Primary</h1>
+          <div class="subtitle wrap">Some explanatory text that will scale down with the viewport.</div>
+        </div>
+      </td>
+
+      <td>
+        <div class="badge">2</div>
+        <div class="cell-inner">
+          <h1 class="title wrap">Cell 2 — Secondary</h1>
+          <div class="subtitle wrap">Long labels wrap or truncate gracefully as needed.</div>
+        </div>
+      </td>
+
+      <td>
+        <div class="badge">3</div>
+        <div class="cell-inner">
+          <h1 class="title wrap">Cell 3 — Content</h1>
+          <div class="subtitle wrap">Use vw-based type and clamp() to scale typography.</div>
+        </div>
+      </td>
+
+      <td>
+        <div class="badge">4</div>
+        <div class="cell-inner">
+          <h1 class="title wrap">Cell 4 — Extras</h1>
+          <div class="subtitle wrap">Padding and gaps are fluid so the table shrinks smoothly.</div>
+        </div>
+      </td>
+
+      <td>
+        <div class="badge">5</div>
+        <div class="cell-inner">
+          <h1 class="title wrap">Cell 5 — Final</h1>
+          <div class="subtitle wrap">No JavaScript. Pure CSS responiveness and full-page coverage.</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
