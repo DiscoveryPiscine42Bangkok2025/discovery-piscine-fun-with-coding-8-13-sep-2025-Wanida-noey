@@ -1,49 +1,30 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <title>
-            Tab
-        </title>
-        <style>
-            #firstcell {
-                height: 200px;
-                width: 840px;
-                background-color: greenyellow;
-                border: 1px black solid;
-                display: flex;    /* เรียง text */
-                align-items: center; 
-                
-            }
-            #secondcell{
-                height: 200px;
-                width: 840px;
-                background-color: orange;
-                border: 1px black solid; 
-                display: flex;
-                align-items: center;
-            }
-            #container{ 
-                display: flex;
-                height: 500px;
-                width: 1700px; 
-                /* border: 1px red solid; */
-                justify-content: center;
-            }
-            body {
-                display: flex;
-                justify-content: center;
-            }
-        </style>
+     <style>
+     table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+
+        td{
+           text-align: left;
+           vertical-align: middle;
+        }
+        table{
+           table-layout: fixed;
+           width: 100%;
+           height: 350px;
+        }
+ 
+     </style>
+
     </head>
     <body>
-        <div id="container">
-
-             <div id="firstcell">
-            First cell
-        </div>
-        <div id="secondcell">
-            Second cell
-        </div>
-        </div>
+      <table>
+         <tr>
+            <td style="background-color: greenyellow; text-align: left">First cell</td>
+            <td style="background-color: orange; text-align: left">Second cell</td>
+         </tr>
+      </table>
     </body>
 </html>
