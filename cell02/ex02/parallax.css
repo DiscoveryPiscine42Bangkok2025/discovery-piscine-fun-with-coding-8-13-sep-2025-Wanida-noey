@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+}
+
+.page1 h1{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: black;
+}
+.page1 {
+    background-image: url(https://i.pinimg.com/736x/1b/52/3c/1b523cad1a48b16fc94ff764e3bf6bbe.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.page2 h1{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+.page2{
+    background-color: black;
+    background-attachment: fixed;
+    background-position: center;
+
+}
+
+.page3 h1{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: black;
+
+}
+.page3 {
+    background-image: url(https://wallpapers.com/images/hd/my-melody-laptop-vijox6qsag11dzvu.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
