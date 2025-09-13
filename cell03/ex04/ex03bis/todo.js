@@ -1,35 +1,47 @@
-const ft_list = document.getElementById("ft_list");
-let toDos = JSON.parse(getCookie("TD") || "[]");
-toDos.forEach(displayToDoItem);
-const newBtn = document.getElementById("new-btn");
-newBtn.addEventListener("click", () => {
-  const newToDo = prompt("Enter a new to do item:");
-  if (newToDo) {
-    const toDoItem = { text: newToDo };
-    toDos.unshift(toDoItem);
-    setCookie("TD", JSON.stringify(toDos), 365);
-    displayToDoItem(toDoItem);
+function createToDoList(){
+    let input = prompt("to do?");
+        let div = $("<div></div>").text(input);
+
+        div.attr("onclick", "remove(this)");
+
+
+        $("#ft_list").prepend(div);
+        setCookie("todo", $("#ft_list").html(), 30);
+}
+
+function setCookie(cname,cvalue,exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
-});
-function displayToDoItem(toDoItem) {
-  const div = document.createElement("div");
-  div.innerText = toDoItem.text;
-  div.addEventListener("click", () => {
-    if (confirm("Are you sure you want to delete this item?")) {
-      toDos.splice(toDos.indexOf(toDoItem), 1);
-      setCookie("TD", JSON.stringify(toDos), 365);
-      ft_list.removeChild(div);
+  
+function getCookie(cname) {
+    let todo = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(todo) == 0) {
+        return c.substring(todo.length, c.length);
+      }
     }
-  });
-  ft_list.insertBefore(div, ft_list.firstChild);
+    return "";
 }
-function getCookie(name) {
-  const cookieValue = `; ${document.cookie}`;
-  const cookieParts = cookieValue.split(`; ${name}=`);
-  if (cookieParts.length === 2) return cookieParts.pop().split(';').shift();
-  else return "";
+
+function checkCookie(){
+    let todo = getCookie("todo");
+    if (todo !== "") {
+        $("#ft_list").html(todo);
+    }
 }
-function setCookie(name, value, days) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  
+function remove(elem){
+    if (confirm("delete ?")) {
+        $(elem).remove();
+        setCookie("todo", $("#ft_list").html(), 30);
+    }
 }
